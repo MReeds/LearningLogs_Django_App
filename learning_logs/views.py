@@ -13,9 +13,6 @@ def index(request):
 def topics(request):
     """ Show all topics """
     topics = Topic.objects.filter(owner=request.user).order_by('date_added')
-    if topic.owner != request.user:
-        raise Http404
-    
     context = {'topics': topics}
     
     return render(request, 'learning_logs/topics.html', context)
@@ -24,6 +21,8 @@ def topics(request):
 def topic(request, topic_id):
     """ Show a single topic and all its entries """
     topic = Topic.objects.get(id=topic_id)
+    if topic.owner != request.user:
+        raise Http404
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     
