@@ -7,19 +7,9 @@
     
 {% block content %}
     
-    <form method='post' action="{% url 'users:login' %}" class="form">
+    <form method='post' action="{% url 'users:login' %}">
         {% csrf_token %}
         {% bootstrap_form form %}
-            <!-- <div>
-                {% bootstrap_field username %}
-            </div> -->
-                <label for="usermail">Email</label>  
-                <input type="email" name="usermail" placeholder="yourname@email.com" required>
-                <!-- <div>
-                    {% bootstrap_field field %}
-                </div> -->
-                <label for="password">Password</label>  
-                <input type="password" name="password" placeholder="password" required>
                 {% buttons %}
                 <button name="submit" class="btn btn-primary">Log in</button>
                 {% endbuttons %}
